@@ -1,0 +1,47 @@
+﻿@model IEnumerable<UserCRUD.Models.User>
+
+@{
+    ViewData["Title"] = "User List";
+}
+
+<div class="container">
+    <h1>User List</h1>
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Skillsets</th>
+                <th>Hobby</th>
+                <th>Actions</th> <!-- Added column for actions -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>@user.PhoneNumber</td>
+                    <td>
+                        @foreach (var skillset in user.Skillsets)
+                        {
+                            <span>@skillset</span>
+                            <br />
+                        }
+                    </td>
+                    <td>@user.Hobby</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-primary">Edit</a>
+                   
+                        <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger">Delete</a>
+                    </td> <!-- Added action links for Edit, Details, and Delete -->
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
